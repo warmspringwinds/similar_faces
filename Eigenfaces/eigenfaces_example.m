@@ -1,7 +1,7 @@
 
 amount_of_biggest_eigen_vectors_to_use = 2;
 
-number_of_face_to_represent_through_combination_of_eigen_faces = 6;
+number_of_face_to_represent_through_combination_of_eigen_faces = 7;
 
 image_name_spec = '../aligned_cropped_faces_gray/%s.bmp';
 
@@ -23,7 +23,7 @@ for i = 1:20
     
     mean_face = mean_face + face_image;
     
-    training_faces(:, i) = double( reshape(face_image, [], 1) );
+    training_faces(:, i) = reshape(face_image, [], 1);
     
 end
 
@@ -32,7 +32,7 @@ end
 % Mean face creation
 mean_face = mean_face / 20;
 
-% From face image to face vector. Easier to work with
+% From mean face image to mean face vector. Easier to work with
 mean_face = reshape(mean_face, [], 1);
 
 % Normalize other faces by subtracting the mean face. So that now expected
@@ -58,6 +58,11 @@ eigen_vectors = eigen_vectors(:, eigen_values_descend_index);
 % Obtain eigenvectors of covariance matrix
 real_eigen_vectors = training_faces * eigen_vectors;
 
+% Normalize obtained vectors so that norm of each one is 1
+for i = 1:20
+    real_eigen_vectors(:, i) = real_eigen_vectors(:, i) / norm(real_eigen_vectors(:, i));
+end
+
 %% Represent one face as a combination of specified number of biggest eigenfaces
 
 eigen_vectors_to_use = real_eigen_vectors(:, 1:amount_of_biggest_eigen_vectors_to_use);
@@ -73,9 +78,7 @@ projected_data = projecting_matrix * training_faces(:, number_of_face_to_represe
 
 reconstructed_face = mean_face + ( eigen_vectors_to_use * projected_data );
 
-% reconstructed_face = normalize_vector(reconstructed_face, 0, 255);
-% 
-% image_to_display = uint8( reshape(reconstructed_face, face_size(1), face_size(2)) );
-% 
-% imshow(image_to_display);
+image_to_display = uint8( reshape(reconstructed_face, face_size(1), face_size(2)) );
+
+imshow(image_to_display);
 
