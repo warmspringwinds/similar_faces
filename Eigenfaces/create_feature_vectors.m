@@ -1,18 +1,15 @@
-% Script that demonstrates eigenfaces work. Selected face is presented as a
-% combination of found eigenfaces.
+% Script to create feature vectors out of provided face images
 
 %% Set up parameters
 
 amount_of_biggest_eigen_vectors_to_use = 9;
 
-number_of_face_to_represent_through_combination_of_eigen_faces = 6;
-
 image_name_spec = '../aligned_cropped_faces_gray/%s.bmp';
 
-original_image_to_represent = imread( sprintf(image_name_spec, ...
-         int2str( number_of_face_to_represent_through_combination_of_eigen_faces) ) );
+sample_face_image = imread( sprintf(image_name_spec, ...
+         int2str( 1 ) ) );
 
-face_size = size( original_image_to_represent );
+face_size = size( sample_face_image );
 
 training_faces = zeros( face_size(1) * face_size(2), 20, 'double');
 
@@ -32,8 +29,15 @@ end
 
 [ mean_face, faces_difference_vectors, eigen_faces_vectors_descend, eigen_values_descend ] = create_eigenface_system(training_faces);
 
+%% Compute the ratio of data that we will save
 
-%% Represent one face as a combination of specified number of biggest eigenfaces
+% In this case with the amount of 9 eigenvectors about 86 amount of data is
+% saved
+
+data_loss_ratio = sum(eigen_values_descend(1:amount_of_biggest_eigen_vectors_to_use)) / sum(eigen_values_descend);
+
+
+%% Represent faces as a combination of specified number of biggest eigenfaces
 
 eigen_vectors_to_use = eigen_faces_vectors_descend(:, 1:amount_of_biggest_eigen_vectors_to_use);
 
@@ -44,16 +48,14 @@ projecting_matrix = eigen_vectors_to_use';
 % We are using normalized face vectors because to get to new coordinate system you also
 % need to do translation i.e change system to new origin that is located in
 % mean value of data
-projected_data = projecting_matrix * faces_difference_vectors(:, number_of_face_to_represent_through_combination_of_eigen_faces);
 
-reconstructed_face = mean_face + ( eigen_vectors_to_use * projected_data );
+% Get projection. In this case they will be used as feature vectors.
+eigenfaces_feature_vectors = projecting_matrix * faces_difference_vectors;
 
-%% Display reconstructed face and original face
+% This is done to follow common style for saving feature vectors
+% Each row is a feature vector for corresponding face 
+eigenfaces_feature_vectors = eigenfaces_feature_vectors';
 
-image_to_display = uint8( reshape(reconstructed_face, face_size(1), face_size(2)) );
+save('Eigenfaces_feature_vectors.mat','eigenfaces_feature_vectors');
 
-figure, imshow(image_to_display);
-title('Reconstructed image');
 
-figure, imshow(original_image_to_represent);
-title('Original image');
