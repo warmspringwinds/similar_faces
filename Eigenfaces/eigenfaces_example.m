@@ -1,13 +1,18 @@
+% Script that demonstrates eigenfaces work. Selected face is presented as a
+% combination of found eigenfaces.
 
-amount_of_biggest_eigen_vectors_to_use = 2;
+%% Set up parameters
 
-number_of_face_to_represent_through_combination_of_eigen_faces = 7;
+amount_of_biggest_eigen_vectors_to_use = 20;
+
+number_of_face_to_represent_through_combination_of_eigen_faces = 6;
 
 image_name_spec = '../aligned_cropped_faces_gray/%s.bmp';
 
-face_size = size( imread('../aligned_cropped_faces_gray/1.bmp') );
+original_image_to_represent = imread( sprintf(image_name_spec, ...
+         int2str( number_of_face_to_represent_through_combination_of_eigen_faces) ) );
 
-mean_face = zeros(face_size(1), face_size(2), 'double');
+face_size = size( original_image_to_represent );
 
 training_faces = zeros( face_size(1) * face_size(2), 20, 'double');
 
@@ -21,64 +26,34 @@ for i = 1:20
     
     face_image = double( imread(image_file_name) );
     
-    mean_face = mean_face + face_image;
-    
     training_faces(:, i) = reshape(face_image, [], 1);
     
 end
 
-%% Compute mean face and normalize other faces
+[ mean_face, faces_difference_vectors, eigen_faces_vectors_descend, eigen_values_descend ] = create_eigenface_system(training_faces);
 
-% Mean face creation
-mean_face = mean_face / 20;
-
-% From mean face image to mean face vector. Easier to work with
-mean_face = reshape(mean_face, [], 1);
-
-% Normalize other faces by subtracting the mean face. So that now expected
-% values for each variable(pixel in this case) is 0
-for i = 1:20
-    training_faces(:, i) = training_faces(:, i) - mean_face;
-end
-
-%% Compute eigenvectors and eigenvalues of covariance matrix with optimized approach
-
-% From this matrix eigenvalues and eigenvectors will be obtained
-covarience_replacement = training_faces' * training_faces;
-
-[eigen_vectors, eigen_values] = eig(covarience_replacement);
-
-% Sort eigenvalues in descending order, so that it will be easier to omit
-% vectors with small eigen values
-[eigen_values_descend, eigen_values_descend_index] = sort(diag( eigen_values ), 'descend');
-
-% Sort eigenvectors in the same way
-eigen_vectors = eigen_vectors(:, eigen_values_descend_index);
-
-% Obtain eigenvectors of covariance matrix
-real_eigen_vectors = training_faces * eigen_vectors;
-
-% Normalize obtained vectors so that norm of each one is 1
-for i = 1:20
-    real_eigen_vectors(:, i) = real_eigen_vectors(:, i) / norm(real_eigen_vectors(:, i));
-end
 
 %% Represent one face as a combination of specified number of biggest eigenfaces
 
-eigen_vectors_to_use = real_eigen_vectors(:, 1:amount_of_biggest_eigen_vectors_to_use);
+eigen_vectors_to_use = eigen_faces_vectors_descend(:, 1:amount_of_biggest_eigen_vectors_to_use);
 
 % Create projecting matrix that consists of eigevectors that are placed in
 % rows of this matrix
 projecting_matrix = eigen_vectors_to_use';
 
-% We are using normalized because to get to new coordinate system you also
+% We are using normalized face vectors because to get to new coordinate system you also
 % need to do translation i.e change system to new origin that is located in
 % mean value of data
-projected_data = projecting_matrix * training_faces(:, number_of_face_to_represent_through_combination_of_eigen_faces);
+projected_data = projecting_matrix * faces_difference_vectors(:, number_of_face_to_represent_through_combination_of_eigen_faces);
 
 reconstructed_face = mean_face + ( eigen_vectors_to_use * projected_data );
 
+%% Display reconstructed face and original face
+
 image_to_display = uint8( reshape(reconstructed_face, face_size(1), face_size(2)) );
 
-imshow(image_to_display);
+figure, imshow(image_to_display);
+title('Reconstructed image');
 
+figure, imshow(original_image_to_represent);
+title('Original image');
