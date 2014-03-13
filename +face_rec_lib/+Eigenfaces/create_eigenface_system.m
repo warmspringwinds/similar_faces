@@ -1,4 +1,5 @@
-function [ mean_face, faces_difference_vectors, eigen_faces_vectors_descend, eigen_values_descend ] = create_eigenface_system( training_face_images_vectors )
+function [ mean_face, faces_difference_vectors, eigen_faces_vectors_descend, eigen_values_descend ] = ... 
+    create_eigenface_system( training_face_images_vectors )
     % Creates eigenface system from a set of training grayscale faces images.
     % Input:
     % @training_face_images_vectors - matrix where each column is a face
