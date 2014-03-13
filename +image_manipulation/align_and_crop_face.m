@@ -11,6 +11,8 @@ function [ output_img ] = align_and_crop_face( image, left_eye_coords, right_eye
     % Output:
     % @output_img - aligned and cropped face
     
+    % Import rotate_img help function from the same package
+    import image_manipulation.rotate_img;
     
     % Vector showing the line connectig eyes
     eye_direction = right_eye_coords - left_eye_coords;

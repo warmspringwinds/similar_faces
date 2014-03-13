@@ -13,6 +13,6 @@ eye_direction = right_eye_coords - left_eye_coords;
 % Direction of the vector shows the angle. Take the opposite angle
 angle_to_align_eyes = -atan2(eye_direction(2), eye_direction(1));
 
-[ xdata, ydata, transform_handler, rotated_img ] = rotate_img( image, left_eye_coords, angle_to_align_eyes);
+[ xdata, ydata, transform_handler, rotated_img ] = image_manipulation.rotate_img( image, left_eye_coords, angle_to_align_eyes);
 
 imshow(rotated_img);

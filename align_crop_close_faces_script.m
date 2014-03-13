@@ -27,7 +27,7 @@ for i = 1:20
     left_eye_coords = face_coords(26, :);
     right_eye_coords = face_coords(27, :);
      
-    result = align_and_crop_face(image, left_eye_coords, right_eye_coords, offset_nearby_eyes, desired_size);
+    result = image_manipulation.align_and_crop_face(image, left_eye_coords, right_eye_coords, offset_nearby_eyes, desired_size);
     
     img_name_to_save = sprintf(image_save_spec, str_number);
     
