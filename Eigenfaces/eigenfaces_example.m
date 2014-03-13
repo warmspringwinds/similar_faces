@@ -1,6 +1,8 @@
 % Script that demonstrates eigenfaces work. Selected face is presented as a
 % combination of found eigenfaces.
 
+start_up_script;
+
 %% Set up parameters
 
 amount_of_biggest_eigen_vectors_to_use = 9;
@@ -30,7 +32,7 @@ for i = 1:20
     
 end
 
-[ mean_face, faces_difference_vectors, eigen_faces_vectors_descend, eigen_values_descend ] = create_eigenface_system(training_faces);
+[ mean_face, faces_difference_vectors, eigen_faces_vectors_descend, eigen_values_descend ] = face_rec_lib.Eigenfaces.create_eigenface_system(training_faces);
 
 
 %% Represent one face as a combination of specified number of biggest eigenfaces
