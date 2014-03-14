@@ -3,9 +3,9 @@
 % used.
 start_up_script;
 
-load('LBP_feature_vectors.mat');
+load('../../feature_vectors/japan_women/LBP_feature_vectors.mat');
 
-lbp_feature_vectors = double(lbp_feature_vectors);
+lbp_feature_vectors = double(lbp_japan_women_feature_vectors);
 
 amount_of_vectors = size(lbp_feature_vectors, 1);
 

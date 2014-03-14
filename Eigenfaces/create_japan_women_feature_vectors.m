@@ -58,6 +58,6 @@ eigenfaces_feature_vectors = projecting_matrix * faces_difference_vectors;
 % Each row is a feature vector for corresponding face 
 eigenfaces_japan_women_feature_vectors = eigenfaces_feature_vectors';
 
-save('Eigenfaces_japan_women_feature_vectors.mat', 'eigenfaces_japan_women_feature_vectors');
+save('../feature_vectors/japan_women/Eigenfaces_feature_vectors.mat', 'eigenfaces_japan_women_feature_vectors');
 
 

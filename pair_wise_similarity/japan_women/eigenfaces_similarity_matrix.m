@@ -2,7 +2,7 @@
 % representing corresponding face. In this example Euclidean distance is
 % used.
 
-load('Eigenfaces_japan_women_feature_vectors.mat');
+load('../../feature_vectors/japan_women/Eigenfaces_feature_vectors.mat');
 
 % Name of the loaded matrix with feature vectors
 eigenfaces_feature_vectors = eigenfaces_japan_women_feature_vectors;
