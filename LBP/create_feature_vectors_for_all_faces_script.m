@@ -1,11 +1,18 @@
 % Script to create feature vectors out of gray-scale cropped and aligned
 % faces and save it to a .mat file for future use.
 
+start_up_script;
+
 image_name_spec = '../aligned_cropped_faces_gray/%s.bmp';
 
 circular_radius = 2;
 amount_of_blocks_for_histogram_on_each_axis = 7;
 amount_of_faces = 20;
+
+load('8bit_uniform_binary_patterns_look_up_table.mat');
+
+% Variable where the table is stored
+eight_bit_binary_patterns_table;
 
 % Size of one feature vector = (amount of blocks that image were broken
 % into)^2 * amount of all possible local binary patterns. Amount of all
@@ -23,7 +30,13 @@ for i = 1:20
     
     image = imread(image_file_name);
     
-    lbp_feature_vectors(i, :) = ( create_feature_vector_using_8bit_unifrom_bin_patterns(image, circular_radius, amount_of_blocks_for_histogram_on_each_axis) )';
+    feature_vector = ...
+                     face_rec_lib.LBP.create_feature_vector_using_circular_8bit_unifrom_patterns( ...
+                     image, circular_radius, amount_of_blocks_for_histogram_on_each_axis, eight_bit_binary_patterns_table);
+    
+    %lbp_feature_vectors(i, :) = ( create_feature_vector_using_8bit_unifrom_bin_patterns(image, circular_radius, amount_of_blocks_for_histogram_on_each_axis) )';
+
+    lbp_feature_vectors(i, :) = feature_vector';
     
 end
 

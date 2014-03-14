@@ -1,5 +1,7 @@
 %% Compute uniform LBP from image and split it
 
+start_up_script;
+
 % Amount of blocks on each axis. It will be k*k blocks.
 k = 5;
 
@@ -19,14 +21,14 @@ eight_bit_binary_patterns_table;
 img = imread('../aligned_cropped_faces_gray/7.bmp');
 
 % Simple LBP without rotation invariance
-plain_circular_binary_patterns = img2circular_binary_patterns(img, radius, circular_points);
+plain_circular_binary_patterns = face_rec_lib.LBP.img2circular_binary_patterns(img, radius, circular_points);
 
 % Create uniform rotation invariant binary patterns with
 % the help of precomputed look-up table.
 converted_img = intlut(plain_circular_binary_patterns, eight_bit_binary_patterns_table);
 
 % Indexes to split LBP image
-[row_indexes, column_indexes] = split_matrix_into_equal_regions(size(converted_img), k);
+[row_indexes, column_indexes] = face_rec_lib.LBP.split_matrix_into_equal_regions(size(converted_img), k);
 
 %% Display how is the image splitted
 
@@ -54,8 +56,9 @@ title('LBP image splitted into blocks');
 histogram_range = 1:10;
 
 % Creat histograms. Each row - histogram for region
-face_features = compute_histograms_of_specified_rectangle_areas(converted_img, row_indexes, column_indexes, histogram_range);
+face_features = face_rec_lib.LBP.compute_histograms_of_specified_rectangle_areas(converted_img, row_indexes, column_indexes, histogram_range);
 
+figure;
 % Show histogram for each region
 for i = 1:k
     for j = 1:k

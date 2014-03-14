@@ -1,5 +1,7 @@
 %% Compute matrix with circular binary uniform patterns with radius 2 and 8 points
 
+start_up_script;
+
 % Load precomputer look-up table of rotation invariant uniform binary patterns
 load('8bit_uniform_binary_patterns_look_up_table.mat');
 
@@ -11,7 +13,7 @@ circular_points = 8;
 
 img = imread('../aligned_cropped_faces_gray/6.bmp');
 
-plain_circular_binary_patterns = img2circular_binary_patterns(img, radius, circular_points);
+plain_circular_binary_patterns = face_rec_lib.LBP.img2circular_binary_patterns(img, radius, circular_points);
 
 % Create uniform rotation invariant binary patterns with
 % the help of precomputed look-up table.

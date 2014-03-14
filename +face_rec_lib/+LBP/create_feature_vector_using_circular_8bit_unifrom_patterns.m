@@ -1,4 +1,5 @@
-function [ feature_vector ] = create_feature_vector_using_8bit_unifrom_bin_patterns( img, circular_radius, amount_of_blocks_for_histogram_on_each_axis)
+function [ feature_vector ] = create_feature_vector_using_circular_8bit_unifrom_patterns( ...
+img, circular_radius, amount_of_blocks_for_histogram_on_each_axis, precomputed_8bit_look_up_table)
     % Computes feature vector using 8bit rotation invariant uniform binary
     % patterns
     % Input:
@@ -15,13 +16,14 @@ function [ feature_vector ] = create_feature_vector_using_8bit_unifrom_bin_patte
     % @feature_vector - resulted feature vector of size
     % amount_of_blocks_for_histogram_on_each_axis^2
     
+    % Load help functions
+    import face_rec_lib.LBP.*;
+    
+    % By this time only 8bit patterns are availble
     circular_points_amount = 8;
     
     % Load precomputer look-up table of rotation invariant uniform binary patterns
-    load('8bit_uniform_binary_patterns_look_up_table.mat');
-
-    % Variable where the table is stored
-    eight_bit_binary_patterns_table;
+    eight_bit_binary_patterns_table = precomputed_8bit_look_up_table;
     
     % Simple LBP without rotation invariance
     plain_circular_binary_patterns = img2circular_binary_patterns(img, circular_radius, circular_points_amount);
