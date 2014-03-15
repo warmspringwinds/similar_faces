@@ -21,3 +21,10 @@ imagesc(pairwise_distance_matrix);
 colorbar;
 
 
+% Salience
+
+[sort_values, sort_indexes] = sort( sum( pairwise_distance_matrix ), 'descend');
+
+sum( pairwise_distance_matrix )
+
+sort_indexes

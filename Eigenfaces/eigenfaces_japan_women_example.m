@@ -5,7 +5,7 @@ start_up_script;
 
 %% Set up parameters
 
-amount_of_biggest_eigen_vectors_to_use = 9;
+amount_of_biggest_eigen_vectors_to_use = 19;
 
 number_of_face_to_represent_through_combination_of_eigen_faces = 6;
 

@@ -6,7 +6,7 @@ start_up_script;
 image_name_spec = '../aligned_cropped_faces_gray/%s.bmp';
 
 circular_radius = 2;
-amount_of_blocks_for_histogram_on_each_axis = 7;
+amount_of_blocks_for_histogram_on_each_axis = 18;
 amount_of_faces = 20;
 
 load('8bit_uniform_binary_patterns_look_up_table.mat');

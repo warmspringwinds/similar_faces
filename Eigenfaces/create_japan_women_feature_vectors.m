@@ -4,7 +4,7 @@ start_up_script;
 
 %% Set up parameters
 
-amount_of_biggest_eigen_vectors_to_use = 9;
+amount_of_biggest_eigen_vectors_to_use = 19;
 
 image_name_spec = '../aligned_cropped_faces_gray/%s.bmp';
 
