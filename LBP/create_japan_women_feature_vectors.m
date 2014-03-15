@@ -20,9 +20,9 @@ eight_bit_binary_patterns_table;
 % patterns.
 size_of_one_feature_vector = amount_of_blocks_for_histogram_on_each_axis^2 * 10;
 
-lbp_japan_women_feature_vectors = zeros(20, size_of_one_feature_vector);
+lbp_japan_women_feature_vectors = zeros(amount_of_faces, size_of_one_feature_vector);
 
-for i = 1:20
+for i = 1:amount_of_faces
 
     str_number = int2str(i);
    
@@ -33,8 +33,6 @@ for i = 1:20
     feature_vector = ...
                      face_rec_lib.LBP.create_feature_vector_using_circular_8bit_unifrom_patterns( ...
                      image, circular_radius, amount_of_blocks_for_histogram_on_each_axis, eight_bit_binary_patterns_table);
-    
-    %lbp_feature_vectors(i, :) = ( create_feature_vector_using_8bit_unifrom_bin_patterns(image, circular_radius, amount_of_blocks_for_histogram_on_each_axis) )';
 
     lbp_japan_women_feature_vectors(i, :) = feature_vector';
     
