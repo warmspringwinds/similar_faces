@@ -22,7 +22,7 @@ colorbar;
 
 % Salience
 
-[sort_values, sort_indexes] = sort( sum( pairwise_distance_matrix ), 'descend');
+[sort_values, sort_indexes] = sort( sum( pairwise_distance_matrix ) );
 
 sum( pairwise_distance_matrix )
 

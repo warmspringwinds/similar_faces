@@ -5,7 +5,7 @@ start_up_script;
 
 %% Set up parameters
 
-amount_of_biggest_eigen_vectors_to_use = 19;
+amount_of_biggest_eigen_vectors_to_use = 13;
 
 number_of_face_to_represent_through_combination_of_eigen_faces = 6;
 
@@ -66,3 +66,17 @@ title('Reconstructed image');
 
 figure, imshow(original_image_to_represent);
 title('Original image');
+
+%% Display selected eigenface
+
+% Select eigenface to display
+eigen_face_to_display = eigen_faces_vectors_descend(:, 4);
+
+% Scale eigenface in order to display
+eigen_face_to_display = face_rec_lib.Eigenfaces.normalize_vector(eigen_face_to_display, 0, 255);
+
+
+image_to_display = uint8( reshape(eigen_face_to_display, face_size(1), face_size(2)) );
+
+figure, imshow(image_to_display);
+title('Eigen face');
