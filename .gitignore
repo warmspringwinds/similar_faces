@@ -9,3 +9,5 @@
 
 #Ignore mit faces database
 mit_faces/
+similar_faces_db/
+facepp/

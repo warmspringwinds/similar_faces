@@ -1,4 +1,4 @@
-%% Compute matrix with circular binary uniform patterns with radius 2 and 8 points
+ad%% Compute matrix with circular binary uniform patterns with radius 2 and 8 points
 
 start_up_script;
 
