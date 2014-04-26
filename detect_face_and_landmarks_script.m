@@ -40,19 +40,19 @@ for i = 1:size(img_list, 1)
     landmark_points = rst2{1}.result{1}.landmark;
     landmark_names = fieldnames(landmark_points);
     
-    landmarks_coords_to_save = zeros(83, 2);
+    landmarks_coords = zeros(83, 2);
     
     % Draw facial key points
     for j = 1 : length(landmark_names)
         pt = getfield(landmark_points, landmark_names{j});
-        landmarks_coords_to_save(j, :) = [ pt.x * img_width / 100, pt.y * img_height / 100 ];
+        landmarks_coords(j, :) = [ pt.x * img_width / 100, pt.y * img_height / 100 ];
     end
     
     [ans, plain_name, extention] = fileparts([ image_path, img_name ]);
     
     filename_to_save = [image_path, plain_name '.mat'];
     
-    save(filename_to_save, 'landmarks_coords_to_save');
+    save(filename_to_save, 'landmarks_coords');
     
     
 end

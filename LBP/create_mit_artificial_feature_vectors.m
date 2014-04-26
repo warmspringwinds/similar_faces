@@ -26,6 +26,8 @@ eight_bit_binary_patterns_table;
 % patterns.
 size_of_one_feature_vector = amount_of_blocks_for_histogram_on_each_axis^2 * 10;
 
+% Load faces images
+
 lbp_mit_artificial_feature_vectors = zeros(number_of_people*6, size_of_one_feature_vector);
 
 for i = 0:number_of_people-1

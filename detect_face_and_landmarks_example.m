@@ -6,7 +6,7 @@ clc; clear;
 addpath('facepp/');
 
 % Load an image, input your API_KEY & API_SECRET
-img = '../similar_faces/similar_faces_db/Lookalike_Final_Publish_v6.0/2_All/02_imp_2.jpg';
+img = '../similar_faces/similar_faces_db/Lookalike_Final_Publish_v6.0/2_All/32_imp_3.jpg';
 API_KEY = 'd45344602f6ffd77baeab05b99fb7730';
 API_SECRET = 'jKb9XJ_GQ5cKs0QOk6Cj1HordHFBWrgL';
 
