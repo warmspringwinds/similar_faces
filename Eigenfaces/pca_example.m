@@ -6,21 +6,21 @@ test_data_2 = [2 3;3 4;4 5;5 6;5 7;2 1;3 2;4 2;4 3;6 4;7 6];
 test_data = [9 39; 15 56; 25 93; 14 61; 10 50; 18 75; 0 32; 16 85; 5 42; 19 70; 16 66; 20 80];
 
 %% Plot test data
-plot(test_data_2(:,1), test_data_2(:, 2), 'o');
+plot(test_data(:,1), test_data(:, 2), 'o');
 
 %% Compute covariance matrix
 % With the help of matlab you can compute the same with cov(test_data_2, 1)
 % 1 is to make matlab divide the matrix by n and not by n-1
 
 % Mean or expected value for each variable(in this case for each column)
-mean_array = mean(test_data_2);
+mean_array = mean(test_data);
 
 % Subtract from each variable its expected value. So that now expected
 % values for each variable is 0.
-normalized = bsxfun(@minus, test_data_2, mean_array);
+normalized = bsxfun(@minus, test_data, mean_array);
 
 % Compute variance matrix
-covariance_matrix = (normalized' * normalized) ./ size(test_data_2, 1);
+covariance_matrix = (normalized' * normalized) ./ size(test_data, 1);
 
 %% Find eigenvectors and eigenvalues of covariance matrix
 
