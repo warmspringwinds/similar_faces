@@ -17,7 +17,7 @@ function [ projected_data ] = project( project_matrix, data_to_project, data_mea
         data_to_project = data_to_project - repmat(data_mean, size(data_to_project, 1), 1);
     end
     
-    projected_data = data_to_project * projecting_matrix; 
+    projected_data = data_to_project * project_matrix; 
 
 end
 
