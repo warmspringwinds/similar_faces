@@ -5,40 +5,12 @@ start_up_script;
 
 %% Set up parameters
 
-amount_of_biggest_eigen_vectors_to_use = 35;
+amount_of_biggest_eigen_vectors_to_use = 36;
 
 %% Load training images and train system
 
 images_path = '../similar_faces_db/Lookalike_Final_Publish_v6.0/aligned_cropped_gray/';
 images_regex = '*gen*.bmp';
-
-% 
-% img_list = dir([image_path, '*gen*.bmp']);
-% 
-% amount_of_training_faces = size(img_list, 1);
-% 
-% sample_face_image_name = img_list(sample_face_number).name;
-% 
-% sample_face_image = imread([ image_path, sample_face_image_name ]);
-% 
-% face_size = size( sample_face_image );
-% 
-% training_faces = zeros( amount_of_training_faces, face_size(1) * face_size(2), 'double');
-% 
-% lables = zeros(1, amount_of_training_faces );
-% 
-% for i = 1:amount_of_training_faces
-%     
-%     img_name = img_list(i).name;
-%     
-%     face_image = double( imread([ image_path, img_name ]) );
-%     
-%     training_faces(i, :) = reshape(face_image, 1, []);
-%     
-%     % Each class contains 5 images
-%     lables(i) = floor( i/5 );
-%     
-% end
 
 [training_faces, image_size, amount_of_images] = image_manipulation.load_images_in_matrix_rows(images_path, images_regex);
 

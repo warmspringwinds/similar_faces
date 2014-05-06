@@ -56,7 +56,7 @@ save('../feature_vectors/mit_artificial_faces/Fisherfaces_feature_vectors.mat', 
 
 %% Example of reconstruction of faces
 
-number_of_reconstructed_face_to_show = 15;
+number_of_reconstructed_face_to_show = 2;
 
 reconstructed_faces = face_rec_lib.Fisherfaces.reconstruct(project_matrix, fisherfaces_mit_artificial_feature_vectors, mean);
 
